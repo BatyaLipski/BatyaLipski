@@ -1,0 +1,5 @@
+E:\milgaPluse\milgaPluse\milgaPluse\bin\Debug\milgaPluse.dll
+E:\milgaPluse\milgaPluse\milgaPluse\bin\Debug\milgaPluse.pdb
+E:\milgaPluse\milgaPluse\milgaPluse\obj\Debug\milgaPluse.csprojResolveAssemblyReference.cache
+E:\milgaPluse\milgaPluse\milgaPluse\obj\Debug\milgaPluse.dll
+E:\milgaPluse\milgaPluse\milgaPluse\obj\Debug\milgaPluse.pdb

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2741c01828d44dd68bf5d2c20bce66ec" Name="Diagram1">
+        <EntityTypeShape EntityType="MilgaPluseDBModel1.BankAccounts" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilgaPluseDBModel1.Children" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilgaPluseDBModel1.Scholarships" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilgaPluseDBModel1.sysdiagrams" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilgaPluseDBModel1.ToraMen" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilgaPluseDBModel1.Loans" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="MilgaPluseDBModel1.FK_Loans_BankAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="MilgaPluseDBModel1.FK_Loans_BankAccounts1" ManuallyRouted="false" />
+        <AssociationConnector Association="MilgaPluseDBModel1.FK_Children_ToraMen" ManuallyRouted="false" />
+        <AssociationConnector Association="MilgaPluseDBModel1.FK_ToraMen_ToraMen" ManuallyRouted="false" />
+        <AssociationConnector Association="MilgaPluseDBModel1.FK_ToraMen_ToraMen1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

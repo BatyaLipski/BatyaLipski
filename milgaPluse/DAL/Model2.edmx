@@ -1,0 +1,627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MilgaPluseDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BankAccounts">
+          <Key>
+            <PropertyRef Name="accountNumber" />
+          </Key>
+          <Property Name="accountNumber" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="bankName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bankNumber" Type="int" Nullable="false" />
+          <Property Name="branchNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Children">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="birthDate" Type="date" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="parentID" Type="int" Nullable="false" />
+          <Property Name="married" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MilgaPluseDB.dbo.Loans' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Loans">
+          <Key>
+            <PropertyRef Name="date" />
+            <PropertyRef Name="lenderID" />
+            <PropertyRef Name="borrowerID" />
+            <PropertyRef Name="takeOrBack" />
+            <PropertyRef Name="lastNameLender" />
+            <PropertyRef Name="lastNameBorrower" />
+            <PropertyRef Name="wayOfReturn" />
+          </Key>
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="lenderID" Type="int" Nullable="false" />
+          <Property Name="borrowerID" Type="int" Nullable="false" />
+          <Property Name="takeOrBack" Type="int" Nullable="false" />
+          <Property Name="firstNameLender" Type="varchar" MaxLength="50" />
+          <Property Name="lastNameLender" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="firstNameBorrower" Type="varchar" MaxLength="50" />
+          <Property Name="lastNameBorrower" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="wayOfReturn" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="accountNumberLender" Type="int" />
+          <Property Name="accountNumberBorrower" Type="int" />
+        </EntityType>
+        <EntityType Name="Scholarships">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="basic" Type="int" Nullable="false" />
+          <Property Name="Musar" Type="int" Nullable="false" />
+          <Property Name="dailyRoutine" Type="int" Nullable="false" />
+          <Property Name="continuous" Type="int" Nullable="false" />
+          <Property Name="lastMonthMark" Type="int" />
+          <Property Name="excellenceScholarship" Type="int" />
+          <Property Name="holidayScholarship" Type="int" />
+          <Property Name="religiousMinistry" Type="int" />
+          <Property Name="Scholarships" Type="int" Nullable="false" />
+          <Property Name="ScholarshipsAndLoan" Type="int" Nullable="false" />
+          <Property Name="refund" Type="int" Nullable="false" />
+          <Property Name="donation" Type="int" />
+          <Property Name="remainderDebt" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="ToraMen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="telephon" Type="int" />
+          <Property Name="cellularTelephone1" Type="int" />
+          <Property Name="cellularTelephone2" Type="int" />
+          <Property Name="city" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="street" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="buildingNumber" Type="int" Nullable="false" />
+          <Property Name="homeNumber" Type="int" />
+          <Property Name="zipCode" Type="int" />
+          <Property Name="birthDate" Type="date" Nullable="false" />
+          <Property Name="children" Type="int" Nullable="false" />
+          <Property Name="fullDay" Type="int" Nullable="false" />
+          <Property Name="doingTest" Type="int" Nullable="false" />
+          <Property Name="refundTransportation" Type="money" />
+        </EntityType>
+        <Association Name="FK_Children_ToraMen">
+          <End Role="ToraMen" Type="Self.ToraMen" Multiplicity="1" />
+          <End Role="Children" Type="Self.Children" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToraMen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Children">
+              <PropertyRef Name="parentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loans_BankAccounts">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="accountNumber" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="accountNumberLender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loans_BankAccounts1">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="accountNumber" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="accountNumberBorrower" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToraMen_ToraMen">
+          <End Role="ToraMen" Type="Self.ToraMen" Multiplicity="1" />
+          <End Role="ToraMen1" Type="Self.ToraMen" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ToraMen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ToraMen1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToraMen_ToraMen1">
+          <End Role="ToraMen" Type="Self.ToraMen" Multiplicity="1" />
+          <End Role="ToraMen1" Type="Self.ToraMen" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ToraMen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ToraMen1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="MilgaPluseDBModel1StoreContainer">
+          <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Children" EntityType="Self.Children" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scholarships" EntityType="Self.Scholarships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ToraMen" EntityType="Self.ToraMen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loans" EntityType="Self.Loans" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Loans].[date] AS [date], 
+    [Loans].[lenderID] AS [lenderID], 
+    [Loans].[borrowerID] AS [borrowerID], 
+    [Loans].[takeOrBack] AS [takeOrBack], 
+    [Loans].[firstNameLender] AS [firstNameLender], 
+    [Loans].[lastNameLender] AS [lastNameLender], 
+    [Loans].[firstNameBorrower] AS [firstNameBorrower], 
+    [Loans].[lastNameBorrower] AS [lastNameBorrower], 
+    [Loans].[wayOfReturn] AS [wayOfReturn], 
+    [Loans].[accountNumberLender] AS [accountNumberLender], 
+    [Loans].[accountNumberBorrower] AS [accountNumberBorrower]
+    FROM [dbo].[Loans] AS [Loans]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Children_ToraMen" Association="Self.FK_Children_ToraMen">
+            <End Role="ToraMen" EntitySet="ToraMen" />
+            <End Role="Children" EntitySet="Children" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loans_BankAccounts" Association="Self.FK_Loans_BankAccounts">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loans_BankAccounts1" Association="Self.FK_Loans_BankAccounts1">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToraMen_ToraMen" Association="Self.FK_ToraMen_ToraMen">
+            <End Role="ToraMen" EntitySet="ToraMen" />
+            <End Role="ToraMen1" EntitySet="ToraMen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToraMen_ToraMen1" Association="Self.FK_ToraMen_ToraMen1">
+            <End Role="ToraMen" EntitySet="ToraMen" />
+            <End Role="ToraMen1" EntitySet="ToraMen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MilgaPluseDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BankAccounts">
+          <Key>
+            <PropertyRef Name="accountNumber" />
+          </Key>
+          <Property Name="accountNumber" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="bankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bankNumber" Type="Int32" Nullable="false" />
+          <Property Name="branchNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Loans" Relationship="Self.FK_Loans_BankAccounts" FromRole="BankAccounts" ToRole="Loans" />
+          <NavigationProperty Name="Loans1" Relationship="Self.FK_Loans_BankAccounts1" FromRole="BankAccounts" ToRole="Loans" />
+        </EntityType>
+        <EntityType Name="Children">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="birthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parentID" Type="Int32" Nullable="false" />
+          <Property Name="married" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ToraMen" Relationship="Self.FK_Children_ToraMen" FromRole="Children" ToRole="ToraMen" />
+        </EntityType>
+        <EntityType Name="Scholarships">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="basic" Type="Int32" Nullable="false" />
+          <Property Name="Musar" Type="Int32" Nullable="false" />
+          <Property Name="dailyRoutine" Type="Int32" Nullable="false" />
+          <Property Name="continuous" Type="Int32" Nullable="false" />
+          <Property Name="lastMonthMark" Type="Int32" />
+          <Property Name="excellenceScholarship" Type="Int32" />
+          <Property Name="holidayScholarship" Type="Int32" />
+          <Property Name="religiousMinistry" Type="Int32" />
+          <Property Name="Scholarships1" Type="Int32" Nullable="false" />
+          <Property Name="ScholarshipsAndLoan" Type="Int32" Nullable="false" />
+          <Property Name="refund" Type="Int32" Nullable="false" />
+          <Property Name="donation" Type="Int32" />
+          <Property Name="remainderDebt" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ToraMen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telephon" Type="Int32" />
+          <Property Name="cellularTelephone1" Type="Int32" />
+          <Property Name="cellularTelephone2" Type="Int32" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="buildingNumber" Type="Int32" Nullable="false" />
+          <Property Name="homeNumber" Type="Int32" />
+          <Property Name="zipCode" Type="Int32" />
+          <Property Name="birthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="children" Type="Int32" Nullable="false" />
+          <Property Name="fullDay" Type="Int32" Nullable="false" />
+          <Property Name="doingTest" Type="Int32" Nullable="false" />
+          <Property Name="refundTransportation" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Children1" Relationship="Self.FK_Children_ToraMen" FromRole="ToraMen" ToRole="Children" />
+          <NavigationProperty Name="ToraMen1" Relationship="Self.FK_ToraMen_ToraMen" FromRole="ToraMen" ToRole="ToraMen1" />
+          <NavigationProperty Name="ToraMen2" Relationship="Self.FK_ToraMen_ToraMen" FromRole="ToraMen1" ToRole="ToraMen" />
+          <NavigationProperty Name="ToraMen11" Relationship="Self.FK_ToraMen_ToraMen1" FromRole="ToraMen" ToRole="ToraMen1" />
+          <NavigationProperty Name="ToraMen3" Relationship="Self.FK_ToraMen_ToraMen1" FromRole="ToraMen1" ToRole="ToraMen" />
+        </EntityType>
+        <EntityType Name="Loans">
+          <Key>
+            <PropertyRef Name="date" />
+            <PropertyRef Name="lenderID" />
+            <PropertyRef Name="borrowerID" />
+            <PropertyRef Name="takeOrBack" />
+            <PropertyRef Name="lastNameLender" />
+            <PropertyRef Name="lastNameBorrower" />
+            <PropertyRef Name="wayOfReturn" />
+          </Key>
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="lenderID" Type="Int32" Nullable="false" />
+          <Property Name="borrowerID" Type="Int32" Nullable="false" />
+          <Property Name="takeOrBack" Type="Int32" Nullable="false" />
+          <Property Name="firstNameLender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastNameLender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstNameBorrower" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastNameBorrower" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="wayOfReturn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="accountNumberLender" Type="Int32" />
+          <Property Name="accountNumberBorrower" Type="Int32" />
+          <NavigationProperty Name="BankAccounts" Relationship="Self.FK_Loans_BankAccounts" FromRole="Loans" ToRole="BankAccounts" />
+          <NavigationProperty Name="BankAccounts1" Relationship="Self.FK_Loans_BankAccounts1" FromRole="Loans" ToRole="BankAccounts" />
+        </EntityType>
+        <Association Name="FK_Loans_BankAccounts">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="accountNumber" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="accountNumberLender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loans_BankAccounts1">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="accountNumber" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="accountNumberBorrower" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Children_ToraMen">
+          <End Role="ToraMen" Type="Self.ToraMen" Multiplicity="1" />
+          <End Role="Children" Type="Self.Children" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToraMen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Children">
+              <PropertyRef Name="parentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToraMen_ToraMen">
+          <End Role="ToraMen" Type="Self.ToraMen" Multiplicity="1" />
+          <End Role="ToraMen1" Type="Self.ToraMen" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ToraMen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ToraMen1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToraMen_ToraMen1">
+          <End Role="ToraMen" Type="Self.ToraMen" Multiplicity="1" />
+          <End Role="ToraMen1" Type="Self.ToraMen" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ToraMen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ToraMen1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MilgaPluseDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" />
+          <EntitySet Name="Children" EntityType="Self.Children" />
+          <EntitySet Name="Scholarships" EntityType="Self.Scholarships" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="ToraMen" EntityType="Self.ToraMen" />
+          <EntitySet Name="Loans" EntityType="Self.Loans" />
+          <AssociationSet Name="FK_Loans_BankAccounts" Association="Self.FK_Loans_BankAccounts">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loans_BankAccounts1" Association="Self.FK_Loans_BankAccounts1">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Children_ToraMen" Association="Self.FK_Children_ToraMen">
+            <End Role="ToraMen" EntitySet="ToraMen" />
+            <End Role="Children" EntitySet="Children" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToraMen_ToraMen" Association="Self.FK_ToraMen_ToraMen">
+            <End Role="ToraMen" EntitySet="ToraMen" />
+            <End Role="ToraMen1" EntitySet="ToraMen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToraMen_ToraMen1" Association="Self.FK_ToraMen_ToraMen1">
+            <End Role="ToraMen" EntitySet="ToraMen" />
+            <End Role="ToraMen1" EntitySet="ToraMen" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(MilgaPluseDBModel1.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(MilgaPluseDBModel1.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MilgaPluseDBModel1StoreContainer" CdmEntityContainer="MilgaPluseDBEntities2">
+          <EntitySetMapping Name="BankAccounts">
+            <EntityTypeMapping TypeName="MilgaPluseDBModel1.BankAccounts">
+              <MappingFragment StoreEntitySet="BankAccounts">
+                <ScalarProperty Name="accountNumber" ColumnName="accountNumber" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="bankName" ColumnName="bankName" />
+                <ScalarProperty Name="bankNumber" ColumnName="bankNumber" />
+                <ScalarProperty Name="branchNumber" ColumnName="branchNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Children">
+            <EntityTypeMapping TypeName="MilgaPluseDBModel1.Children">
+              <MappingFragment StoreEntitySet="Children">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="parentID" ColumnName="parentID" />
+                <ScalarProperty Name="married" ColumnName="married" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scholarships">
+            <EntityTypeMapping TypeName="MilgaPluseDBModel1.Scholarships">
+              <MappingFragment StoreEntitySet="Scholarships">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="basic" ColumnName="basic" />
+                <ScalarProperty Name="Musar" ColumnName="Musar" />
+                <ScalarProperty Name="dailyRoutine" ColumnName="dailyRoutine" />
+                <ScalarProperty Name="continuous" ColumnName="continuous" />
+                <ScalarProperty Name="lastMonthMark" ColumnName="lastMonthMark" />
+                <ScalarProperty Name="excellenceScholarship" ColumnName="excellenceScholarship" />
+                <ScalarProperty Name="holidayScholarship" ColumnName="holidayScholarship" />
+                <ScalarProperty Name="religiousMinistry" ColumnName="religiousMinistry" />
+                <ScalarProperty Name="Scholarships1" ColumnName="Scholarships" />
+                <ScalarProperty Name="ScholarshipsAndLoan" ColumnName="ScholarshipsAndLoan" />
+                <ScalarProperty Name="refund" ColumnName="refund" />
+                <ScalarProperty Name="donation" ColumnName="donation" />
+                <ScalarProperty Name="remainderDebt" ColumnName="remainderDebt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MilgaPluseDBModel1.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToraMen">
+            <EntityTypeMapping TypeName="MilgaPluseDBModel1.ToraMen">
+              <MappingFragment StoreEntitySet="ToraMen">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telephon" ColumnName="telephon" />
+                <ScalarProperty Name="cellularTelephone1" ColumnName="cellularTelephone1" />
+                <ScalarProperty Name="cellularTelephone2" ColumnName="cellularTelephone2" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="buildingNumber" ColumnName="buildingNumber" />
+                <ScalarProperty Name="homeNumber" ColumnName="homeNumber" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+                <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+                <ScalarProperty Name="children" ColumnName="children" />
+                <ScalarProperty Name="fullDay" ColumnName="fullDay" />
+                <ScalarProperty Name="doingTest" ColumnName="doingTest" />
+                <ScalarProperty Name="refundTransportation" ColumnName="refundTransportation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans">
+            <EntityTypeMapping TypeName="MilgaPluseDBModel1.Loans">
+              <MappingFragment StoreEntitySet="Loans">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="lenderID" ColumnName="lenderID" />
+                <ScalarProperty Name="borrowerID" ColumnName="borrowerID" />
+                <ScalarProperty Name="takeOrBack" ColumnName="takeOrBack" />
+                <ScalarProperty Name="firstNameLender" ColumnName="firstNameLender" />
+                <ScalarProperty Name="lastNameLender" ColumnName="lastNameLender" />
+                <ScalarProperty Name="firstNameBorrower" ColumnName="firstNameBorrower" />
+                <ScalarProperty Name="lastNameBorrower" ColumnName="lastNameBorrower" />
+                <ScalarProperty Name="wayOfReturn" ColumnName="wayOfReturn" />
+                <ScalarProperty Name="accountNumberLender" ColumnName="accountNumberLender" />
+                <ScalarProperty Name="accountNumberBorrower" ColumnName="accountNumberBorrower" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MilgaPluseDBModel1.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MilgaPluseDBModel1.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MilgaPluseDBModel1.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MilgaPluseDBModel1.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MilgaPluseDBModel1.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MilgaPluseDBModel1.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MilgaPluseDBModel1.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MilgaPluseDBModel1.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MilgaPluseDBModel1.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

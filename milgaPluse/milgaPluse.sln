@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "milgaPluse", "milgaPluse\milgaPluse.csproj", "{E23CB305-52E0-4877-9A5E-179017FA46FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{107FD89E-0048-456A-9E0A-6A3C30F5EC86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A09C662D-1916-451F-A966-933A4277A640}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{FCECA42F-7D89-4707-A008-993874A70891}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureVMPublishModule.psm1 = PublishScripts\AzureVMPublishModule.psm1
+		PublishScripts\Publish-WebApplicationVM.ps1 = PublishScripts\Publish-WebApplicationVM.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{49D199B8-1273-4EBF-B2E0-EF4C463D4065}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\API-VM-dev-2.json = PublishScripts\Configurations\API-VM-dev-2.json
+		PublishScripts\Configurations\API-VM-dev.json = PublishScripts\Configurations\API-VM-dev.json
+		PublishScripts\Configurations\Client-VM-dev.json = PublishScripts\Configurations\Client-VM-dev.json
+		PublishScripts\Configurations\GUI-VM-dev-2.json = PublishScripts\Configurations\GUI-VM-dev-2.json
+		PublishScripts\Configurations\GUI-VM-dev-3.json = PublishScripts\Configurations\GUI-VM-dev-3.json
+		PublishScripts\Configurations\GUI-VM-dev-4.json = PublishScripts\Configurations\GUI-VM-dev-4.json
+		PublishScripts\Configurations\GUI-VM-dev.json = PublishScripts\Configurations\GUI-VM-dev.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{3E02D6C3-35E3-463B-9F83-3994359B5E78}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E23CB305-52E0-4877-9A5E-179017FA46FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E23CB305-52E0-4877-9A5E-179017FA46FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E23CB305-52E0-4877-9A5E-179017FA46FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E23CB305-52E0-4877-9A5E-179017FA46FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{107FD89E-0048-456A-9E0A-6A3C30F5EC86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{107FD89E-0048-456A-9E0A-6A3C30F5EC86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{107FD89E-0048-456A-9E0A-6A3C30F5EC86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{107FD89E-0048-456A-9E0A-6A3C30F5EC86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A09C662D-1916-451F-A966-933A4277A640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A09C662D-1916-451F-A966-933A4277A640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A09C662D-1916-451F-A966-933A4277A640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A09C662D-1916-451F-A966-933A4277A640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E02D6C3-35E3-463B-9F83-3994359B5E78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E02D6C3-35E3-463B-9F83-3994359B5E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E02D6C3-35E3-463B-9F83-3994359B5E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E02D6C3-35E3-463B-9F83-3994359B5E78}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{49D199B8-1273-4EBF-B2E0-EF4C463D4065} = {FCECA42F-7D89-4707-A008-993874A70891}
+	EndGlobalSection
+EndGlobal
